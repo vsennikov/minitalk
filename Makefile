@@ -1,0 +1,38 @@
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
+LIBFT_PATH = libft
+LIBFT = $(LIBFT_PATH)/libft.a
+INCLUDES = -I./$(LIBFT_PATH)
+SERVER_SRC = server_code/main.c
+SERVER_O = $(SERVER_SRC:.c=.o)
+CLIENT_SRC = client_code/main.c
+CLIENT_O = $(CLIENT_SRC:.c=.o)
+
+SERVER_NAME = server
+CLIENT_NAME = client
+
+all: $(LIBFT) $(SERVER_NAME) $(CLIENT_NAME)
+
+$(LIBFT):
+	$(MAKE) -C ./libft
+
+$(SERVER_NAME): $(SERVER_O) $(LIBFT)
+	$(CC) $(CFLAGS) $(SERVER_O) -L./$(LIBFT_PATH) -lft -o $(SERVER_NAME)
+
+$(CLIENT_NAME): $(CLIENT_O) $(LIBFT)
+	$(CC) $(CFLAGS) $(CLIENT_O) -L./$(LIBFT_PATH) -lft -o $(CLIENT_NAME)
+
+%.o: %.c server.h client.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	@$(MAKE)  -C ./libft clean
+	@rm -f $(SERVER_O) $(CLIENT_O)
+
+fclean: clean
+	@$(MAKE) -C ./libft fclean
+	@rm -f $(CLIENT_NAME) $(SERVER_NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
