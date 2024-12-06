@@ -1,14 +1,12 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-
 LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
+LIBFT_C = $(LIBFT_PATH)/*.c
 INCLUDES = -I./$(LIBFT_PATH)
-
-SERVER_SRC = server_code/main.c
-CLIENT_SRC = client_code/main.c
-
+SERVER_SRC = server_code/main.c server_code/error_exit.c
 SERVER_O = $(SERVER_SRC:.c=.o)
+CLIENT_SRC = client_code/main.c client_code/error_exit.c
 CLIENT_O = $(CLIENT_SRC:.c=.o)
 
 SERVER_NAME = server
@@ -16,7 +14,7 @@ CLIENT_NAME = client
 
 all: $(LIBFT) $(SERVER_NAME) $(CLIENT_NAME)
 
-$(LIBFT):
+$(LIBFT): $(LIBFT_C)
 	$(MAKE) -C ./libft
 
 $(SERVER_NAME): $(SERVER_O) $(LIBFT)
@@ -34,7 +32,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C ./libft fclean
-	@rm -f $(CLIENT_NAME) $(SERVER_NAME)
+	@rm -f $(SERVER_NAME) $(CLIENT_NAME)
 
 re: fclean all
 
