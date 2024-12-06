@@ -1,11 +1,14 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+
 LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 INCLUDES = -I./$(LIBFT_PATH)
+
 SERVER_SRC = server_code/main.c
-SERVER_O = $(SERVER_SRC:.c=.o)
 CLIENT_SRC = client_code/main.c
+
+SERVER_O = $(SERVER_SRC:.c=.o)
 CLIENT_O = $(CLIENT_SRC:.c=.o)
 
 SERVER_NAME = server

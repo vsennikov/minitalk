@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:56 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/05 15:27:27 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:36:16 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	main(void)
 {
-	ft_printf("Hello from server");
+	pid_t	pid;
+
+	pid = getpid();
+	ft_printf("Server pid = %d\n", pid);
+	while (1)
+	{
+		pause();
+	}
 	return (0);
 }
