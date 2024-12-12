@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:20:35 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/12 17:16:03 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:26:40 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	send_message(int pid, char *msg)
 		send_char(&vorze, pid);
 		i++;
 	}
+	vorze.row = '\0' / 16;
+	vorze.col = '\0' % 16;
+	send_char(&vorze, pid);
 }
 
 int	main(int argc, char **argv)

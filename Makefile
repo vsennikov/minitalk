@@ -4,7 +4,7 @@ LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_C = $(LIBFT_PATH)/*.c
 INCLUDES = -I./$(LIBFT_PATH)
-SERVER_SRC = server_code/main.c server_code/error_exit.c
+SERVER_SRC = server_code/main.c server_code/error_exit.c server_code/signal_handler.c
 SERVER_O = $(SERVER_SRC:.c=.o)
 CLIENT_SRC = client_code/main.c client_code/error_exit.c
 CLIENT_O = $(CLIENT_SRC:.c=.o)
