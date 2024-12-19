@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:43:20 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/12/05 16:02:30 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
-
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+int	ft_toupper(int c)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}

@@ -6,34 +6,43 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:20:35 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/12 18:26:40 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:28:49 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
+
+void	error_exit(char *msg, int code)
+{
+	if (code)
+		write(2, msg, ft_strlen(msg));
+	exit(code);
+}
 
 static void	send_char(t_vorze *vorze, int pid)
 {
 	int	i;
 
 	i = 0;
+	kill(pid, SIGUSR2);
+	usleep(100);
 	while (i != vorze->row)
 	{
 		kill(pid, SIGUSR1);
-		usleep(500);
+		usleep(100);
 		i++;
 	}
 	kill(pid, SIGUSR2);
-	usleep(500);
+	usleep(100);
 	i = 0;
 	while (i != vorze->col)
 	{
 		kill(pid, SIGUSR1);
-		usleep(500);
+		usleep(100);
 		i++;
 	}
 	kill(pid, SIGUSR2);
-	usleep(500);
+	usleep(100);
 }
 
 static void	send_message(int pid, char *msg)
@@ -42,15 +51,14 @@ static void	send_message(int pid, char *msg)
 	t_vorze	vorze;
 
 	i = 0;
-	while (msg[i])
+	while (i != 20)
 	{
 		kill(pid, SIGUSR1);
-		usleep(500);
+		usleep(100);
 		i++;
 	}
-	kill(pid, SIGUSR2);
-	usleep(500);
 	i = 0;
+	usleep(100);
 	while (msg[i])
 	{
 		vorze.row = msg[i] / 16;
@@ -58,9 +66,12 @@ static void	send_message(int pid, char *msg)
 		send_char(&vorze, pid);
 		i++;
 	}
-	vorze.row = '\0' / 16;
-	vorze.col = '\0' % 16;
-	send_char(&vorze, pid);
+	kill(pid, SIGUSR2);
+	usleep(100);
+	kill(pid, SIGUSR2);
+	usleep(100);
+	kill(pid, SIGUSR2);
+	usleep(100);
 }
 
 int	main(int argc, char **argv)

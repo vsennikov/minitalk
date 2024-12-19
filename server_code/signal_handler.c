@@ -6,13 +6,11 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:32:40 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/12 18:36:05 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:56:11 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
-
-int			g_was_allocated = -1;
 
 static char	*reallocate_str(char *str, char ch)
 {
@@ -42,9 +40,8 @@ static char	*reallocate_str(char *str, char ch)
 
 static void	print_msg(char **str, int *sig1, int *sig2, int *rows)
 {
-	ft_printf("%s\n", *str);
+	ft_printf("%s", *str);
 	free(*str);
-	g_was_allocated = -1;
 	*sig1 = 0;
 	*sig2 = 0;
 	*rows = 0;
@@ -67,20 +64,13 @@ static void	handle_sig2_2(int *rows, int *sig1, int *sig2, char **str)
 void	handle_sigusr2(int *sig1, int *sig2, int *rows, char **str)
 {
 	(*sig2)++;
-	if (*sig2 == 1 && g_was_allocated == -1)
-	{
-		*str = calloc(*sig1, sizeof(char));
-		if (!*str)
-			error_exit("failed to allocate mem for str\n", 1);
-		g_was_allocated = *sig1;
+	if (*sig2 == 1 && *str[0] == 0)
 		*sig1 = 0;
-		*sig2 = 0;
-	}
-	if (*sig2 == 1)
+	if (*sig2 == 2 && *str)
 	{
 		*rows = *sig1;
 		*sig1 = 0;
 	}
-	if (*sig2 == 2)
+	if (*sig2 == 3 && *str)
 		handle_sig2_2(rows, sig1, sig2, str);
 }

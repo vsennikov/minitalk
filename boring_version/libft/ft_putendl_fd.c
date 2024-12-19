@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 12:00:29 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 12:00:46 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+void	ft_putendl_fd(char *s, int fd)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}

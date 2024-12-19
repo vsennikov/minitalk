@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:59:18 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 11:59:52 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+void	ft_putchar_fd(char c, int fd)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	write(fd, &c, sizeof(char));
+}

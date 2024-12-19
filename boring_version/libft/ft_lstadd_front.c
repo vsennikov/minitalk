@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/15 16:14:08 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/12/05 16:00:33 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	new->next = *lst;
+	*lst = new;
+}

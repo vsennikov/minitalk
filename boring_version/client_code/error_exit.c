@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/12/19 19:07:31 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/12/19 19:07:53 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "client.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+void	error_exit(char *msg, int code)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	if (code)
+		write(2, msg, ft_strlen(msg));
+	exit(code);
+}

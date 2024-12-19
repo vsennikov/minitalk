@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:37:53 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 11:38:03 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
-
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+int	ft_isalnum(int c)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	if (c >= '0' && c <= '9')
+		return (1);
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else if (c >= 'a' && c <= 'z')
+		return (1);
+	else
+		return (0);
+}

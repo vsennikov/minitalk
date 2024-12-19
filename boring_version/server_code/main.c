@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:56 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 21:04:46 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:08:22 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,30 @@ static void	handle_sigint(char **str)
 	exit(0);
 }
 
-static void	handle_new_message(int *rows, int *sig1, int *sig2, char **str)
-{
-	free(*str);
-	*str = NULL;
-	*rows = 0;
-	*sig1 = 0;
-	*sig2 = 0;
-	*str = ft_calloc(1, sizeof(char));
-	if (!*str)
-		error_exit("failed to allocate mem for str\n", 1);
-}
-
 static void	signal_handler(int signum)
 {
-	static int	rows = 0;
-	static int	sig1 = 0;
-	static int	sig2 = 0;
-	static char	*str = NULL;
+	static char				*str = NULL;
+	static int				bit_i = 0;
+	static unsigned char	ch;
+	static int				sig1 = 0;
+	static int				ff = 0;
 
+	ch <<= 1;
+	if (signum == SIGUSR1)
+		sig1_func(&ff, &sig1, &bit_i, &ch);
+	else if (signum == SIGUSR2)
+	{
+		bit_i++;
+		ff = 0;
+	}
 	if (signum == SIGINT)
 		handle_sigint(&str);
-	else if (signum == SIGUSR1)
-		sig1++;
-	else if (signum == SIGUSR2)
-		handle_sigusr2(&sig1, &sig2, &rows, &str);
-	if (sig1 == 20 && str)
-		handle_new_message(&rows, &sig1, &sig2, &str);
-	else if (sig1 == 20 && !str)
-	{
-		str = ft_calloc(1, sizeof(char));
-		sig1 = 0;
-		sig2 = 0;
-		rows = 0;
-		if (!str)
-			error_exit("failed to allocate mem for str\n", 1);
-	}
+	if (sig1 == 8)
+		str = sig_8_func(str, &sig1, &bit_i);
+	if (bit_i == 8)
+		str = bit_i_8_func(str, &sig1, &bit_i, ch);
+	if (ff == 16)
+		str = ff_func(str, &bit_i, &sig1, &ff);
 }
 
 int	main(void)
@@ -71,11 +59,10 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("Server pid: %d\n", pid);
+	signal(SIGUSR1, signal_handler);
+	signal(SIGUSR2, signal_handler);
+	signal(SIGINT, signal_handler);
 	while (1)
-	{
-		signal(SIGUSR1, signal_handler);
-		signal(SIGUSR2, signal_handler);
-		signal(SIGINT, signal_handler);
-	}
+		pause();
 	return (0);
 }

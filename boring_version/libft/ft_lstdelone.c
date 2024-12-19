@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/15 16:15:36 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/15 16:52:29 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	if (lst == NULL || del == NULL)
+		return ;
+	del(lst->content);
+	free(lst);
+}

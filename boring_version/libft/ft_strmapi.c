@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:58:16 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 11:58:52 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	unsigned int	i;
+	char			*res;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	res = (char *)malloc((i + 1) * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		res[i] = f(i, s[i]);
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}

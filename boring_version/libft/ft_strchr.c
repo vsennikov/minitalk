@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:44:01 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 12:11:08 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+char	*ft_strchr(const char *str, int search_str)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	int	i;
+	int	size;
+
+	i = 0;
+	size = (int) ft_strlen((char *)str);
+	while (i <= size)
+	{
+		if ((unsigned char) str[i] == (unsigned char) search_str)
+			return ((char *)(str + i));
+		i++;
+	}
+	return (0);
+}

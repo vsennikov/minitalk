@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 15:21:08 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/17 20:57:58 by vsenniko         ###   ########.fr       */
+/*   Created: 2024/09/13 11:51:53 by vsenniko          #+#    #+#             */
+/*   Updated: 2024/09/13 11:52:17 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-
-typedef struct s_vorze
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	int	row;
-	int	col;
-}		t_vorze;
-#endif
+	size_t	i;
+
+	i = 0;
+	if (i == n)
+		return (0);
+	while (str1[i] == str2[i] && str1[i] != '\0' && i < n - 1)
+	{
+		i++;
+	}
+	if (str1[i] == str2[i])
+		return (0);
+	else
+		return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+}
