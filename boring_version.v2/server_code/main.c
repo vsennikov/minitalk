@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:18:56 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/20 13:11:35 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:51:11 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,10 @@ static void	handle_sigint(char **str)
 
 static void	signal_handler(int signum)
 {
-	static char				*str = NULL;
-	static int				bit_i = 0;
-	static unsigned char	ch;
-	static int				sig1 = 0;
-	static int				ff = 0;
+	static char	*msg = NULL;
 
-	ch <<= 1;
-	if (signum == SIGUSR1)
-		sig1_func(&ff, &sig1, &bit_i, &ch);
-	else if (signum == SIGUSR2)
-	{
-		bit_i++;
-		ff = 0;
-	}
 	if (signum == SIGINT)
-		handle_sigint(&str);
-	if (sig1 == 8)
-		str = sig_8_func(str, &sig1, &bit_i);
-	if (bit_i == 8)
-		str = bit_i_8_func(str, &sig1, &bit_i, ch);
-	if (ff == 16)
-		str = ff_func(str, &bit_i, &sig1, &ff);
-	ft_printf("ff = %d\n", ff);
+		handle_sigint(&msg);
 }
 
 int	main(void)
@@ -60,9 +41,7 @@ int	main(void)
 
 	pid = getpid();
 	ft_printf("Server pid: %d\n", pid);
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
-	signal(SIGINT, signal_handler);
+
 	while (1)
 		pause();
 	return (0);

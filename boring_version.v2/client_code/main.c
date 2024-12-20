@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:20:35 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/20 12:59:43 by vsenniko         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:57:52 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,15 @@ static void	main_stuff(int pid, char *msg)
 int	main(int argc, char **argv)
 {
 	int	pid;
+	struct sigaction act;
 
 	if (argc != 3)
 		error_exit("You should pass 2 argument", 1);
 	if (!argv[1][0] || !argv[2][0])
 		error_exit("Some of the arguments are empty", 1);
 	pid = ft_atoi(argv[1]);
-	g_pid_sig = ft_strdup(argv[1]);
-	if (!g_pid_sig)
-		error_exit("ft_strdup failed\n", 1);
-	g_pid_sig = ft_strjoin(g_pid_sig, "+");
-	if (!g_pid_sig)
-		error_exit("ft_strjoin failed\n", 1);
 	if (pid <= 0)
 		error_exit("Invalid pid", 1);
-	signal(SIGINT, signal_handler);
-	main_stuff(pid, argv[2]);
+	act.sa_handler = &signal_handler;
 	return (0);
 }
