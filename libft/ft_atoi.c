@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 11:05:42 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/09/13 12:44:43 by vsenniko         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:52:13 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static int	ft_isspace(char ch)
  * Spaces checked with static func. 
  * 
 */
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	minus;
-	int	result;
+	int		i;
+	int		minus;
+	long	result;
 
 	i = 0;
 	minus = 0;

@@ -6,7 +6,7 @@
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:55:18 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/12/05 16:02:38 by vsenniko         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:13:05 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		real_size = ft_strlen((char *) s + start);
 	if (real_size < len)
 		len = real_size;
-	substr = (char *)malloc(len * sizeof(char) + 1);
+	substr = (char *)ft_calloc(33, sizeof(char));
 	if (substr == NULL)
 		return (NULL);
 	while (i < len && s[start])

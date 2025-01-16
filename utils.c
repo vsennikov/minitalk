@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsenniko <vsenniko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 11:51:07 by vsenniko          #+#    #+#             */
-/*   Updated: 2024/09/13 12:10:04 by vsenniko         ###   ########.fr       */
+/*   Created: 2025/01/02 14:37:08 by vsenniko          #+#    #+#             */
+/*   Updated: 2025/01/06 13:05:48 by vsenniko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minitalk.h"
 
-char	*ft_strrchr(const char *str, int c)
+void	error_exit(char *msg, int code)
 {
-	int		i;
+	if (code)
+		write(2, msg, ft_strlen(msg));
+	exit(code);
+}
 
-	i = (int) ft_strlen((char *) str);
-	while (i >= 0)
+int	atoi_wrap(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if ((unsigned char)str[i] == (unsigned char)c)
-			return ((char *)str + i);
-		i--;
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		i++;
 	}
-	return (0);
+	if (i > 10)
+		return (-1);
+	else if (i == 10)
+	{
+		if (ft_atoi(str) > 2147483647 || ft_atoi(str) < 1)
+			return (-1);
+	}
+	return (ft_atoi(str));
 }
